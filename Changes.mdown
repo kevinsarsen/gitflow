@@ -23,8 +23,13 @@
 [algernon]: https://github.com/algernon
 [jebmeier]: https://github.com/jebmeier
 [aleno]: https://github.com/aleno
+[kevinsarsen]: https://github.com/kevinsarsen
  
 # Changelog
+
+#### 1.9.0-dev.33 - Kevin Remix
+[Kevin Sarsen][kevinsarsen]
+* Added support for Bugfix branches
 
 #### 1.9.0-dev.33
 [Peter van der Does][petervanderdoes]

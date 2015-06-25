@@ -106,10 +106,10 @@ file=     Use given config file
 	parse_args "$@"
 
 	output=$(git config $gitflow_config_option --get gitflow.branch.master)
-	echo "Branch name for production releases: $output "
+	echo "Branch name for Stable code: $output "
 
 	output=$(git config $gitflow_config_option --get gitflow.branch.develop)
-	echo "Branch name for \"next release\" development: $output "
+	echo "Branch name for unstable, active development: $output "
 
 	output=$(git config $gitflow_config_option --get gitflow.prefix.feature)
 	echo "Feature branch prefix: $output "
@@ -119,6 +119,9 @@ file=     Use given config file
 
 	output=$(git config $gitflow_config_option --get gitflow.prefix.hotfix)
 	echo "Hotfix branch prefix: $output "
+
+	output=$(git config $gitflow_config_option --get gitflow.prefix.bugfix)
+	echo "Bugfix branch prefix: $output "
 
 	output=$(git config $gitflow_config_option --get gitflow.prefix.support)
 	echo "Support branch prefix: $output "
@@ -171,6 +174,10 @@ file=     Use given config file
 		cfg_option="gitflow.prefix.hotfix"
 		txt="Hotfix branch prefix"
 		;;
+	bugfix)
+		cfg_option="gitflow.prefix.bugfix"
+		txt="Bugfix branch prefix"
+		;;
 	release)
 		cfg_option="gitflow.prefix.release"
 		txt="Release branch prefix"
@@ -193,7 +200,7 @@ file=     Use given config file
 	if [ $OPTION = "master" ]; then
 		develop_branch=$(git config --get gitflow.branch.develop)
 		if [ "$value" = $develop_branch ]; then
-			die "Production and \"next release\" branch should differ."
+			die "Stable and Unstable branches should differ."
 		fi
 
 		if ! git_local_branch_exists "$value" && git_remote_branch_exists "origin/$value"; then
@@ -206,7 +213,7 @@ file=     Use given config file
 	if [ $OPTION = "develop" ]; then
 		master_branch=$(git config --get gitflow.branch.master)
 		if [ "$value" = $master_branch ]; then
-			die "Production and \"next release\" branch should differ."
+			die "Stable and Unstable branches should differ."
 		fi
 
 		if ! git_local_branch_exists "$value" && git_remote_branch_exists "origin/$value"; then
